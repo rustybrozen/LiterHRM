@@ -447,8 +447,7 @@ if (isset($_POST['submit'])) {
                     $updated_count = updateRemainingSchedules($employee_id, $month, $year);
                     if ($updated_count > 0) {
                         $success[] = "Đã cập nhật $updated_count bản ghi còn lại cho nhân viên mã {$data['employee_code']} trong tháng $month/$year.";
-                        echo $isUnauthorized;
-                        echo "---";
+                      
                     }
                 }
             }
