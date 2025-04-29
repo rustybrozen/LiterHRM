@@ -89,10 +89,14 @@ if ($user['role_name'] != 'Admin' && $userData) {
     $stmt->execute([$userData['employee_id']]);
     $performanceHistory = $stmt->fetchAll();
 }
-if ($userData['department_id'] == 4   ) {
-    $text = "Ca";
-} else {
+if (isset($userData['department_id'])) {
     $text = "Ngày";
+
+    if ($userData['department_id'] == 4) {
+        $text = "Ca";
+    } else {
+        $text = "Ngày";
+    }
 }
 
 include dirname(__DIR__) . '/partials/header.php';
@@ -233,7 +237,7 @@ include dirname(__DIR__) . '/partials/header.php';
     <?php endif; ?>
 
     <?php if (!empty($performanceHistory) && $user['role_name'] != 'Admin'): ?>
-      
+
 
         <div class="row">
             <div class="col-md-12">
@@ -277,7 +281,7 @@ include dirname(__DIR__) . '/partials/header.php';
                                             <td><?= $record['working_day'] ?: 0 ?></td>
                                             <td><?= $record['authorized_absences'] ?: 0 ?> /
                                                 <?= $record['unauthorized_absences'] ?: 0 ?> / <?= $record['late_day'] ?: 0 ?>
-                                                
+
                                             </td>
 
 
@@ -286,10 +290,10 @@ include dirname(__DIR__) . '/partials/header.php';
                                                 <?= number_format($record['total_allowance']) ?> đ
                                             </td>
                                             <td><?= number_format($record['bonus_more']) ?> đ / <?= number_format(
-                                                   $record['penalty_more'] +
-                                                   ($record['late_day'] * $record['late_arrival_penalty']) +
-                                                   ($record['unauthorized_absences'] * $record['unauthorized_absence_penalty'])
-                                               ) ?> đ</td>
+                                                                                                    $record['penalty_more'] +
+                                                                                                        ($record['late_day'] * $record['late_arrival_penalty']) +
+                                                                                                        ($record['unauthorized_absences'] * $record['unauthorized_absence_penalty'])
+                                                                                                ) ?> đ</td>
 
                                             <td><?= number_format($record['final_salary']) ?> đ</td>
                                             <td><?= $record['salary_calculated'] ? number_format($record['final_salary']) . ' đ' : '<span class="text-warning">Chưa tính</span>' ?>
@@ -311,8 +315,7 @@ include dirname(__DIR__) . '/partials/header.php';
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
-
-    $('[data-bs-toggle="collapse"]').on('click', function () {
+    $('[data-bs-toggle="collapse"]').on('click', function() {
         var target = $(this).data('bs-target');
         $(target).collapse('toggle');
     });
