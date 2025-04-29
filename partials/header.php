@@ -170,7 +170,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                             endif;
                             
                             // Menu chỉ dành cho Admin
-                            if ($currentUser['role_name'] != 'Nhân viên'):
+                            if ($currentUser['role_name'] == 'Admin'):
                                 renderMenuItem('fas fa-hourglass-start', 'Quản lý Giờ làm', 'work_hours.php', 'work_hours.php');
                             endif;
                             
